@@ -1,5 +1,4 @@
 # Nama Menjadi Kata
----
 ### Apa ini?
 Ini adalah proyek iseng saya dimana Anda dapat memasukkan nama Anda dan program ini akan mengubahnya menjadi sebuah kata acak dari KBBI.
 
