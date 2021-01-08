@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     let words = [];
 
-    fetch("daftar_kata.txt")
+    fetch("contents/daftar_kata.txt")
         .then(response => response.text())
         .then(text => {
             words = text.split("\n");
