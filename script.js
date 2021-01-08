@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const showWord = name => {
         if(name == "") {
-            answerDiv.innerHTML = "<b>Masukkan nama pada kolom di atas!</b>"
+            answerDiv.innerHTML = "<b>🤔</b>"
         } else {
             const word = getWord(name);
             const kbbiEntryURL = `https://kbbi.kemdikbud.go.id/entri/${word}`;

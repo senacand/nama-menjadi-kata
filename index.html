@@ -4,20 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Nama to KBBI</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
     <style type="text/css">
+        html {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1em;
+        }
+
         a {
             text-decoration: none;
             color: rgb(167, 0, 0);
+        }
+
+        h1 {
+            font-size: 2em;
+            display: block;
+            font-weight: 500;
+        }
+
+        main {
+            padding: 12px;
+            border: 1px solid #000000;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .content {
+            max-width: 980px;
+            display: block;
+            margin: auto;   
         }
 
         .social-attribution {
             margin-top: 20px;
             padding-left: 0px;
             list-style-type: none;
+            font-size: 0.8em;
+        }
+
+        .input-form input {
+            display: inline-block;
+            width: 100%;
+            margin: 4px 0px 24px 0px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #000000;
+            border-radius: 12px;
         }
 
         .social-attribution li {
-            margin: 5px 0px 0px 0px;
+            margin: 8px 12px 0px 12px;
+            display: inline-block;
         }
 
         .social-attribution img {
@@ -33,20 +76,40 @@
         .social-attribution li span {
             margin: 2px 0px 0px 8px;
         }
+
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            position: absolute;
+            bottom: 32px;
+            left: 0px;
+            right: 0px;
+            padding: 0px 8px 0px 8px;
+        }
     </style>
 </head>
 <body>
     <div class="content">
-        Masukkan nama anda:
-        <input type="text" value="" id="name_textfield" placeholder="Udin" />
+        <h1>Nama Menjadi Kata</h1>
+        <main>
+            <div class="input-form">
+                Masukkan nama Anda
+                <input type="text" value="" id="name_textfield" placeholder="Udin" />
+            </div>
+            <div class="answer" id="answer">
+                
+            </div>
+        </main>
+        <ul class="social-attribution">
+            <li><a href="https://github.com/senacand/nama-menjadi-kata" target="_blank"><img src="images/github-logo.svg"/><span>Kontribusi di GitHub</span></a></li>
+            <li><a href="https://kbbi.kemdikbud.go.id" target="_blank"><img src="images/library_books-24px.svg"/><span>KBBI</span></a></li>
+        </ul>
     </div>
-    <div class="answer" id="answer">
-        
-    </div>
-    <ul class="social-attribution">
-        <li><a href="https://github.com/senacand/nama-menjadi-kata" target="_blank"><img src="images/github-logo.svg"/><span>Kontribusi di GitHub</span></a></li>
-        <li><a href="https://kbbi.kemdikbud.go.id" target="_blank"><img src="images/library_books-24px.svg"/><span>Kamus Besar Bahasa Indonesia</span></a></li>
-    </ul>
+    <footer>
+        Dibuat oleh <a href="https://github.com/senacand" target="_blank">SenaCand</a> &bull; 2021<br><br>
+        Algoritma <i>generator</i> nama menjadi kata dibuat secara sembarang.
+        Jika <i>generator</i> menghasilkan kata yang menyinggung pihak tertentu, hal tersebut adalah kebetulan belaka.<br><br><i>Generator</i> versi 1.1
+    </footer>
     <script type="text/javascript" src="./script.js"></script>
 </body>
 </html>
