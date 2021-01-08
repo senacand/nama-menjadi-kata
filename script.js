@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", event => {
             definitionDiv.style.display = "none";
         } else {
             const word = getWord(name);
-            const kbbiEntryURL = `https://kateglo.com/?mod=dictionary&action=view&phrase=${encodeURIComponent(word)}`;
-            answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b><a href="${kbbiEntryURL}" target="_blank">${word}</a></b>.`;
+            const kategloEntryURL = `https://kateglo.com/?mod=dictionary&action=view&phrase=${encodeURIComponent(word)}`;
+            answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b><a href="${kategloEntryURL}" target="_blank">${word}</a></b>.`;
             definitionDiv.style.display = "block";
             showWordDefinition(word);
         }
@@ -75,6 +75,10 @@ document.addEventListener("DOMContentLoaded", event => {
                     .join("");
                 
                 definitionDiv.innerHTML = `Definisi dari kata <b>${word}</b>:<ul>${definitionsList}</ul>`;
+            })
+            .catch(e => {
+                const kbbiEntryUrl = `https://kbbi.kemdikbud.go.id/entri/${encodeURIComponent(word)}`;
+                definitionDiv.innerHTML = `<a href="${kbbiEntryUrl}" target="_blank">Lihat definisi kata <b>${word}</b> di situs KBBI</a>`
             });
     }, 1000);
 
