@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const getWord = name => {
         const totalWords = words.length;
-        const nameWordNumber = wordToNumber(name);
-        const nameWordIndex = (((nameWordNumber % Math.floor(totalWords/26)) * Math.floor(totalWords/26)) + Math.floor(nameWordNumber / Math.floor(totalWords/26))) % totalWords;
+        const nameWordNumber = wordToNumber(name.toLowerCase());
+        const nameWordIndex = (((nameWordNumber % Math.floor(totalWords/26)) * Math.floor(totalWords/26)) + Math.floor(nameWordNumber / Math.floor(totalWords/26))) % totalWords; // Spreads the value throughout the word list so the result will not only show the first few words in the list.
         
         if(name == "" || totalWords == 0) {
             return ""
