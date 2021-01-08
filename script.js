@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", event => {
         if(name == "") {
             answerDiv.innerHTML = "<b>Masukkan nama pada kolom di atas!</b>"
         } else {
-            answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b>${getWord(name)}</b>.`;
+            const word = getWord(name);
+            const kbbiEntryURL = `https://kbbi.kemdikbud.go.id/entri/${word}`;
+            answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b><a href="${kbbiEntryURL}" target="_blank">${word}</a></b>.`;
         }
     };
 
