@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", event => {
     const nameTextField = document.querySelector("#name_textfield");
     const answerDiv = document.querySelector("#answer");
 
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             words = text.split("\n");
         });
 
-    nameTextField.addEventListener("input", function(event) {
+    nameTextField.addEventListener("input", event => {
         showWord(nameTextField.value);
     });
 
