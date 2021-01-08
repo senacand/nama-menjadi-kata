@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", event => {
         .then(response => response.text())
         .then(text => {
             words = text.split("\n");
+            showWord(nameTextField.value);
         });
 
     nameTextField.addEventListener("input", event => {
@@ -26,7 +27,11 @@ document.addEventListener("DOMContentLoaded", event => {
     };
 
     const showWord = name => {
-        answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b>${getWord(name)}</b>`;
+        if(name == "") {
+            answerDiv.innerHTML = "<b>Masukkan nama pada kolom di atas!</b>"
+        } else {
+            answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b>${getWord(name)}</b>.`;
+        }
     };
 
     const wordToNumber = word => 
