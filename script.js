@@ -1,6 +1,21 @@
+const debounce = (func, wait) => {
+    let timeout;
+
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
 document.addEventListener("DOMContentLoaded", event => {
     const nameTextField = document.querySelector("#name_textfield");
     const answerDiv = document.querySelector("#answer");
+    const definitionDiv = document.querySelector("#definition");
 
     let words = [];
 
@@ -27,12 +42,16 @@ document.addEventListener("DOMContentLoaded", event => {
     };
 
     const showWord = name => {
+        definitionDiv.innerHTML = "<img src=\"images/Rolling-1s-31px.svg\" />";
         if(name == "") {
-            answerDiv.innerHTML = "<b>🤔</b>"
+            answerDiv.innerHTML = "🤔";
+            definitionDiv.style.display = "none";
         } else {
             const word = getWord(name);
-            const kbbiEntryURL = `https://kbbi.kemdikbud.go.id/entri/${word}`;
+            const kbbiEntryURL = `https://kateglo.com/?mod=dictionary&action=view&phrase=${encodeURIComponent(word)}`;
             answerDiv.innerHTML = `Kata dari nama <b>${name}</b> adalah <b><a href="${kbbiEntryURL}" target="_blank">${word}</a></b>.`;
+            definitionDiv.style.display = "block";
+            showWordDefinition(word);
         }
     };
 
@@ -41,4 +60,24 @@ document.addEventListener("DOMContentLoaded", event => {
             .split("")
             .map(c => c.charCodeAt(0))
             .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+    const showWordDefinition = debounce(word => {
+        getWordDefinition(word)
+            .then(definitions => {
+                const definitionsList = definitions
+                    .map(definition => `<li>${definition.definition}</li>`)
+                    .join("");
+                
+                definitionDiv.innerHTML = `Definisi dari kata <b>${word}</b>:<ul>${definitionsList}</ul>`;
+            });
+    }, 1000);
+
+    const getWordDefinition = word => fetch(`https://jsonp.afeld.me/?url=${encodeURIComponent("https://kateglo.com/api.php?format=json&phrase="+word)}`)
+        .then(response => response.json())
+        .then(json => json.kateglo.definition.map(definition => {
+            return {
+                "phrase": definition["phrase"],
+                "definition": definition["def_text"]
+            }
+        }));
 });
