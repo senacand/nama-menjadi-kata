@@ -12,6 +12,16 @@ const debounce = (func, wait) => {
     };
 };
 
+String.prototype.hashCode = function(){
+    var hash = 0;
+    for (var i = 0; i < this.length; i++) {
+        var character = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+character;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
 document.addEventListener("DOMContentLoaded", event => {
     const nameTextField = document.querySelector("#name_textfield");
     const answerDiv = document.querySelector("#answer");
@@ -24,6 +34,7 @@ document.addEventListener("DOMContentLoaded", event => {
         .then(text => {
             words = text.split("\n");
             showWord(nameTextField.value);
+            console.log(words.length);
         });
 
     nameTextField.addEventListener("input", event => {
@@ -32,7 +43,8 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const getWord = name => {
         const totalWords = words.length;
-        const nameWordNumber = wordToNumber(name.toLowerCase());
+        const nameWordNumber = Math.abs(name.toLowerCase().trim().hashCode()) % words.length;
+        console.log(nameWordNumber);
         const nameWordIndex = (((nameWordNumber % Math.floor(totalWords/26)) * Math.floor(totalWords/26)) + Math.floor(nameWordNumber / Math.floor(totalWords/26))) % totalWords; // Spreads the value throughout the word list so the result will not only show the first few words in the list.
         
         if(name == "" || totalWords == 0) {
@@ -54,12 +66,6 @@ document.addEventListener("DOMContentLoaded", event => {
             showWordDefinition(word);
         }
     };
-
-    const wordToNumber = word => 
-        word
-            .split("")
-            .map(c => c.charCodeAt(0))
-            .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
     const showWordDefinition = debounce(word => {
         getWordDefinition(word)
