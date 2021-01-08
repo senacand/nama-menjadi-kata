@@ -14,21 +14,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         showWord(nameTextField.value);
     });
 
-    const pow = (a, b, mod) => {
-        if(b == 0) {
-            return 1;
-        } else if (b == 1) {
-            return a
-        } else {
-            const result = pow(a, b/2, mod) % mod;
-            if (b % 2 == 0) {
-                return (result * result) % mod;
-            } else {
-                return ((((result * result) % mod) % mod) * (a % mod)) % mod;
-            }
-        }
-    }
-
     const getWord = name => {
         const totalWords = words.length;
         const nameWordNumber = wordToNumber(name);
